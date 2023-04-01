@@ -1,0 +1,52 @@
+1 Install lshw on PVE
+apt install lshw
+
+2 Check & note down details about physical disks we want to passthrough
+lshw -class disk -class storage
+
+We should use disk by their ID rather than name (/dev/sda) which can change and will cause trouble
+
+2.1 Use following command to list all physical disk IDs
+ls -l /dev/disk/by-id/
+
+2.2 Now we need to find the one that matches the “product” or “serial”
+e.g...... /dev/disk/by-id/ata-xxxxxxxxx-xxxxx_xxx ......
+or try
+ls -al /dev/disk/by-id | grep SHdi1uhJ
+or
+ls -al /dev/disk/by-id | grep SJFhf7219
+
+
+3 Add the disk to VM
+qm set 100 -scsi5 /dev/disk/by-id/ata-xxxxxxxxx-xxxxx_xxx
+
+100: The VM id which can be found from PVE web gui (besides the VM’s name)
+scsi5: The virtual port number which the disk will be using to attach to VM
+For example, in the following configuration, the disk is attached by using -scsi0, if we want to attach another disk, we can use -scsi1 or -scsi2 or -scsi3 etc…..
+
+4 Check if the disk attached successfully
+grep SHdi1uhJ /etc/pve/qemu-server/100.conf
+Output
+
+scsi5: /dev/disk/by-id/ata-xxxxxxxxx-xxxxx_xxx, size=......
+Note
+There are different Controller Types we can use, IDE (Slow), SCSI (Fast), VirtIO Block (May get deprecated in the future)
+Using SCSI with VirtIO SCSI as SCSI Controller Type for VM disks is recommended
+
+5 Bonus
+5.1 How to passthrough HDD serial number to VM
+To passthrough HDD or SSD serial number, we can find the HDD serial number, manually edit the VM conf file and add the HDD serial number there.
+Before start, make sure the relative VM is powered off.
+
+5.2 To find HDD/SSH serial number by using lshw -C disk
+
+nano /etc/pve/qemu-server/100.conf
+Find the line like following
+
+virtio1: /dev/disk/by-id/ata-WDC_xxxxxxx-xxxxxxxxxxxxxx,size=xxxxxxK
+We add the serial number to the end of the line, the final line looks like
+
+virtio1: /dev/disk/by-id/ata-WDC_xxxxxxx-xxxxxxxxxxxxxx,size=xxxxxxK,serial=xxxxxx-xxxxxxx
+Note: The limit for serial is 18-20bytes (around 18 characters), no space allowed
+
+Ctrl + X, Y, Enter key to Save and Exit the nano text editor
