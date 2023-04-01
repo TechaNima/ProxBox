@@ -1,0 +1,313 @@
+root@pve:~# lspci -v
+00:00.0 Host bridge: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers (rev 07)
+        Subsystem: ASUSTeK Computer Inc. Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers
+        Flags: bus master, fast devsel, latency 0, IOMMU group 0
+        Capabilities: [e0] Vendor Specific Information: Len=10 <?>
+        Kernel driver in use: skl_uncore
+
+00:01.0 PCI bridge: Intel Corporation 6th-10th Gen Core Processor PCIe Controller (x16) (rev 07) (prog-if 00 [Normal decode])
+        Flags: bus master, fast devsel, latency 0, IRQ 121, IOMMU group 1
+        Bus: primary=00, secondary=01, subordinate=01, sec-latency=0
+        I/O behind bridge: 0000e000-0000efff [size=4K]
+        Memory behind bridge: de000000-df0fffff [size=17M]
+        Prefetchable memory behind bridge: 00000000c0000000-00000000d1ffffff [size=288M]
+        Capabilities: [88] Subsystem: ASUSTeK Computer Inc. 6th-9th Gen Core Processor PCIe Controller (x16)
+        Capabilities: [80] Power Management version 3
+        Capabilities: [90] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [a0] Express Root Port (Slot+), MSI 00
+        Capabilities: [100] Virtual Channel
+        Capabilities: [140] Root Complex Link
+        Capabilities: [d94] Secondary PCI Express
+        Kernel driver in use: pcieport
+
+00:01.1 PCI bridge: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor PCIe Controller (x8) (rev 07) (prog-if 00 [Normal decode])
+        Flags: bus master, fast devsel, latency 0, IRQ 122, IOMMU group 2
+        Bus: primary=00, secondary=02, subordinate=02, sec-latency=0
+        I/O behind bridge: 0000d000-0000dfff [size=4K]
+        Memory behind bridge: dc000000-dd0fffff [size=17M]
+        Prefetchable memory behind bridge: 00000000a0000000-00000000b1ffffff [size=288M]
+        Capabilities: [88] Subsystem: ASUSTeK Computer Inc. Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor PCIe Controller (x8)
+        Capabilities: [80] Power Management version 3
+        Capabilities: [90] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [a0] Express Root Port (Slot+), MSI 00
+        Capabilities: [100] Virtual Channel
+        Capabilities: [140] Root Complex Link
+        Capabilities: [d94] Secondary PCI Express
+        Kernel driver in use: pcieport
+
+00:14.0 USB controller: Intel Corporation 100 Series/C230 Series Chipset Family USB 3.0 xHCI Controller (rev 31) (prog-if 30 [XHCI])
+        Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family USB 3.0 xHCI Controller
+        Flags: bus master, medium devsel, latency 0, IRQ 131, IOMMU group 3
+        Memory at dd130000 (64-bit, non-prefetchable) [size=64K]
+        Capabilities: [70] Power Management version 2
+        Capabilities: [80] MSI: Enable+ Count=1/8 Maskable- 64bit+
+        Kernel driver in use: vfio-pci
+        Kernel modules: xhci_pci
+
+00:16.0 Communication controller: Intel Corporation 100 Series/C230 Series Chipset Family MEI Controller #1 (rev 31)
+        Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family MEI Controller
+        Flags: bus master, fast devsel, latency 0, IRQ 149, IOMMU group 4
+        Memory at dd14d000 (64-bit, non-prefetchable) [size=4K]
+        Capabilities: [50] Power Management version 3
+        Capabilities: [8c] MSI: Enable+ Count=1/1 Maskable- 64bit+
+        Kernel driver in use: mei_me
+        Kernel modules: mei_me
+
+00:17.0 RAID bus controller: Intel Corporation SATA Controller [RAID mode] (rev 31)
+        Subsystem: ASUSTeK Computer Inc. SATA Controller [RAID mode]
+        Flags: bus master, 66MHz, medium devsel, latency 0, IRQ 129, IOMMU group 5
+        Memory at dd148000 (32-bit, non-prefetchable) [size=8K]
+        Memory at dd14c000 (32-bit, non-prefetchable) [size=256]
+        I/O ports at f050 [size=8]
+        I/O ports at f040 [size=4]
+        I/O ports at f020 [size=32]
+        Memory at dd14b000 (32-bit, non-prefetchable) [size=2K]
+        Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [70] Power Management version 3
+        Capabilities: [a8] SATA HBA v1.0
+        Kernel driver in use: ahci
+        Kernel modules: ahci
+
+00:1b.0 PCI bridge: Intel Corporation 100 Series/C230 Series Chipset Family PCI Express Root Port #17 (rev f1) (prog-if 00 [Normal decode])
+        Flags: bus master, fast devsel, latency 0, IRQ 123, IOMMU group 6
+        Bus: primary=00, secondary=03, subordinate=03, sec-latency=0
+        I/O behind bridge: [disabled]
+        Memory behind bridge: [disabled]
+        Prefetchable memory behind bridge: [disabled]
+        Capabilities: [40] Express Root Port (Slot-), MSI 00
+        Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [90] Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family PCI Express Root Port
+        Capabilities: [a0] Power Management version 3
+        Kernel driver in use: pcieport
+
+00:1b.2 PCI bridge: Intel Corporation 100 Series/C230 Series Chipset Family PCI Express Root Port #19 (rev f1) (prog-if 00 [Normal decode])
+        Flags: bus master, fast devsel, latency 0, IRQ 124, IOMMU group 7
+        Bus: primary=00, secondary=04, subordinate=04, sec-latency=0
+        I/O behind bridge: [disabled]
+        Memory behind bridge: df500000-df5fffff [size=1M]
+        Prefetchable memory behind bridge: [disabled]
+        Capabilities: [40] Express Root Port (Slot+), MSI 00
+        Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [90] Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family PCI Express Root Port
+        Capabilities: [a0] Power Management version 3
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [140] Access Control Services
+        Capabilities: [220] Secondary PCI Express
+        Kernel driver in use: pcieport
+
+00:1b.3 PCI bridge: Intel Corporation 100 Series/C230 Series Chipset Family PCI Express Root Port #20 (rev f1) (prog-if 00 [Normal decode])
+        Flags: bus master, fast devsel, latency 0, IRQ 125, IOMMU group 8
+        Bus: primary=00, secondary=05, subordinate=05, sec-latency=0
+        I/O behind bridge: 0000c000-0000cfff [size=4K]
+        Memory behind bridge: df400000-df4fffff [size=1M]
+        Prefetchable memory behind bridge: [disabled]
+        Capabilities: [40] Express Root Port (Slot+), MSI 00
+        Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [90] Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family PCI Express Root Port
+        Capabilities: [a0] Power Management version 3
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [140] Access Control Services
+        Capabilities: [220] Secondary PCI Express
+        Kernel driver in use: pcieport
+
+00:1c.0 PCI bridge: Intel Corporation 100 Series/C230 Series Chipset Family PCI Express Root Port #1 (rev f1) (prog-if 00 [Normal decode])
+        Flags: bus master, fast devsel, latency 0, IRQ 126, IOMMU group 9
+        Bus: primary=00, secondary=06, subordinate=06, sec-latency=0
+        I/O behind bridge: [disabled]
+        Memory behind bridge: df300000-df3fffff [size=1M]
+        Prefetchable memory behind bridge: [disabled]
+        Capabilities: [40] Express Root Port (Slot+), MSI 00
+        Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [90] Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family PCI Express Root Port
+        Capabilities: [a0] Power Management version 3
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [140] Access Control Services
+        Capabilities: [220] Secondary PCI Express
+        Kernel driver in use: pcieport
+
+00:1c.4 PCI bridge: Intel Corporation 100 Series/C230 Series Chipset Family PCI Express Root Port #5 (rev f1) (prog-if 00 [Normal decode])
+        Flags: bus master, fast devsel, latency 0, IRQ 127, IOMMU group 10
+        Bus: primary=00, secondary=07, subordinate=07, sec-latency=0
+        I/O behind bridge: [disabled]
+        Memory behind bridge: df200000-df2fffff [size=1M]
+        Prefetchable memory behind bridge: [disabled]
+        Capabilities: [40] Express Root Port (Slot+), MSI 00
+        Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [90] Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family PCI Express Root Port
+        Capabilities: [a0] Power Management version 3
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [140] Access Control Services
+        Capabilities: [220] Secondary PCI Express
+        Kernel driver in use: pcieport
+
+00:1d.0 PCI bridge: Intel Corporation 100 Series/C230 Series Chipset Family PCI Express Root Port #9 (rev f1) (prog-if 00 [Normal decode])
+        Flags: bus master, fast devsel, latency 0, IRQ 128, IOMMU group 11
+        Bus: primary=00, secondary=08, subordinate=08, sec-latency=0
+        I/O behind bridge: 00002000-00002fff [size=4K]
+        Memory behind bridge: 80000000-801fffff [size=2M]
+        Prefetchable memory behind bridge: 0000000080200000-00000000803fffff [size=2M]
+        Capabilities: [40] Express Root Port (Slot+), MSI 00
+        Capabilities: [80] MSI: Enable+ Count=1/1 Maskable- 64bit-
+        Capabilities: [90] Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family PCI Express Root Port
+        Capabilities: [a0] Power Management version 3
+        Kernel driver in use: pcieport
+
+00:1f.0 ISA bridge: Intel Corporation Z170 Chipset LPC/eSPI Controller (rev 31)
+        Subsystem: ASUSTeK Computer Inc. Z170 Chipset LPC/eSPI Controller
+        Flags: bus master, medium devsel, latency 0, IOMMU group 12
+
+00:1f.2 Memory controller: Intel Corporation 100 Series/C230 Series Chipset Family Power Management Controller (rev 31)
+        Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family Power Management Controller
+        Flags: bus master, fast devsel, latency 0, IOMMU group 12
+        Memory at dd144000 (32-bit, non-prefetchable) [size=16K]
+
+00:1f.3 Audio device: Intel Corporation 100 Series/C230 Series Chipset Family HD Audio Controller (rev 31)
+        Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family HD Audio Controller
+        Flags: bus master, fast devsel, latency 32, IRQ 150, IOMMU group 12
+        Memory at dd140000 (64-bit, non-prefetchable) [size=16K]
+        Memory at dd120000 (64-bit, non-prefetchable) [size=64K]
+        Capabilities: [50] Power Management version 3
+        Capabilities: [60] MSI: Enable+ Count=1/1 Maskable- 64bit+
+        Kernel driver in use: snd_hda_intel
+        Kernel modules: snd_hda_intel
+
+00:1f.4 SMBus: Intel Corporation 100 Series/C230 Series Chipset Family SMBus (rev 31)
+        Subsystem: ASUSTeK Computer Inc. 100 Series/C230 Series Chipset Family SMBus
+        Flags: medium devsel, IRQ 16, IOMMU group 12
+        Memory at dd14a000 (64-bit, non-prefetchable) [size=256]
+        I/O ports at f000 [size=32]
+        Kernel driver in use: i801_smbus
+        Kernel modules: i2c_i801
+
+00:1f.6 Ethernet controller: Intel Corporation Ethernet Connection (2) I219-V (rev 31)
+        Subsystem: ASUSTeK Computer Inc. Ethernet Connection (2) I219-V
+        Flags: bus master, fast devsel, latency 0, IRQ 130, IOMMU group 13
+        Memory at dd100000 (32-bit, non-prefetchable) [size=128K]
+        Capabilities: [c8] Power Management version 3
+        Capabilities: [d0] MSI: Enable+ Count=1/1 Maskable- 64bit+
+        Capabilities: [e0] PCI Advanced Features
+        Kernel driver in use: e1000e
+        Kernel modules: e1000e
+
+01:00.0 VGA compatible controller: NVIDIA Corporation GP104 [GeForce GTX 1080] (rev a1) (prog-if 00 [VGA controller])
+        Subsystem: eVga.com. Corp. GP104 [GeForce GTX 1080]
+        Flags: bus master, fast devsel, latency 0, IRQ 16, IOMMU group 14
+        Memory at de000000 (32-bit, non-prefetchable) [size=16M]
+        Memory at c0000000 (64-bit, prefetchable) [size=256M]
+        Memory at d0000000 (64-bit, prefetchable) [size=32M]
+        I/O ports at e000 [size=128]
+        Expansion ROM at 000c0000 [disabled] [size=128K]
+        Capabilities: [60] Power Management version 3
+        Capabilities: [68] MSI: Enable- Count=1/1 Maskable- 64bit+
+        Capabilities: [78] Express Legacy Endpoint, MSI 00
+        Capabilities: [100] Virtual Channel
+        Capabilities: [128] Power Budgeting <?>
+        Capabilities: [420] Advanced Error Reporting
+        Capabilities: [600] Vendor Specific Information: ID=0001 Rev=1 Len=024 <?>
+        Capabilities: [900] Secondary PCI Express
+        Kernel driver in use: vfio-pci
+        Kernel modules: nvidiafb, nouveau
+
+01:00.1 Audio device: NVIDIA Corporation GP104 High Definition Audio Controller (rev a1)
+        Subsystem: eVga.com. Corp. GP104 High Definition Audio Controller
+        Flags: bus master, fast devsel, latency 0, IRQ 17, IOMMU group 15
+        Memory at df080000 (32-bit, non-prefetchable) [size=16K]
+        Capabilities: [60] Power Management version 3
+        Capabilities: [68] MSI: Enable- Count=1/1 Maskable- 64bit+
+        Capabilities: [78] Express Endpoint, MSI 00
+        Capabilities: [100] Advanced Error Reporting
+        Kernel driver in use: vfio-pci
+        Kernel modules: snd_hda_intel
+
+02:00.0 VGA compatible controller: NVIDIA Corporation GP104 [GeForce GTX 1080] (rev a1) (prog-if 00 [VGA controller])
+        Subsystem: eVga.com. Corp. GP104 [GeForce GTX 1080]
+        Flags: fast devsel, IRQ 10, IOMMU group 16
+        Memory at dc000000 (32-bit, non-prefetchable) [disabled] [size=16M]
+        Memory at a0000000 (64-bit, prefetchable) [disabled] [size=256M]
+        Memory at b0000000 (64-bit, prefetchable) [disabled] [size=32M]
+        I/O ports at d000 [disabled] [size=128]
+        Expansion ROM at dd000000 [disabled] [size=512K]
+        Capabilities: [60] Power Management version 3
+        Capabilities: [68] MSI: Enable- Count=1/1 Maskable- 64bit+
+        Capabilities: [78] Express Legacy Endpoint, MSI 00
+        Capabilities: [100] Virtual Channel
+        Capabilities: [250] Latency Tolerance Reporting
+        Capabilities: [128] Power Budgeting <?>
+        Capabilities: [420] Advanced Error Reporting
+        Capabilities: [600] Vendor Specific Information: ID=0001 Rev=1 Len=024 <?>
+        Capabilities: [900] Secondary PCI Express
+        Kernel driver in use: vfio-pci
+        Kernel modules: nvidiafb, nouveau
+
+02:00.1 Audio device: NVIDIA Corporation GP104 High Definition Audio Controller (rev a1)
+        Subsystem: eVga.com. Corp. GP104 High Definition Audio Controller
+        Flags: bus master, fast devsel, latency 0, IRQ 18, IOMMU group 17
+        Memory at dd080000 (32-bit, non-prefetchable) [size=16K]
+        Capabilities: [60] Power Management version 3
+        Capabilities: [68] MSI: Enable- Count=1/1 Maskable- 64bit+
+        Capabilities: [78] Express Endpoint, MSI 00
+        Capabilities: [100] Advanced Error Reporting
+        Kernel driver in use: snd_hda_intel
+        Kernel modules: snd_hda_intel
+
+04:00.0 Audio device: Creative Labs Sound Core3D [Sound Blaster Recon3D / Z-Series] (rev 01)
+        Subsystem: Creative Labs SB1570 SB Audigy Fx
+        Flags: bus master, fast devsel, latency 0, IRQ 18, IOMMU group 18
+        Memory at df504000 (64-bit, non-prefetchable) [size=16K]
+        Memory at df500000 (64-bit, non-prefetchable) [size=16K]
+        Capabilities: [40] Power Management version 3
+        Capabilities: [50] MSI: Enable- Count=1/1 Maskable+ 64bit+
+        Capabilities: [70] Express Endpoint, MSI 00
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [140] Virtual Channel
+        Capabilities: [170] Device Serial Number 00-00-00-00-00-00-00-00
+        Capabilities: [180] Power Budgeting <?>
+        Kernel driver in use: vfio-pci
+        Kernel modules: snd_hda_intel
+
+05:00.0 SATA controller: ASMedia Technology Inc. ASM1062 Serial ATA Controller (rev 02) (prog-if 01 [AHCI 1.0])
+        Subsystem: ASUSTeK Computer Inc. ASM1062 Serial ATA Controller
+        Flags: bus master, fast devsel, latency 0, IRQ 19, IOMMU group 19
+        I/O ports at c050 [size=8]
+        I/O ports at c040 [size=4]
+        I/O ports at c030 [size=8]
+        I/O ports at c020 [size=4]
+        I/O ports at c000 [size=32]
+        Memory at df400000 (32-bit, non-prefetchable) [size=512]
+        Capabilities: [78] Power Management version 3
+        Capabilities: [80] Express Legacy Endpoint, MSI 00
+        Capabilities: [100] Virtual Channel
+        Kernel driver in use: ahci
+        Kernel modules: ahci
+
+06:00.0 USB controller: ASMedia Technology Inc. ASM1142 USB 3.1 Host Controller (prog-if 30 [XHCI])
+        Subsystem: ASUSTeK Computer Inc. ASM1142 USB 3.1 Host Controller
+        Flags: bus master, fast devsel, latency 0, IRQ 16, IOMMU group 20
+        Memory at df300000 (64-bit, non-prefetchable) [size=32K]
+        Capabilities: [50] MSI: Enable- Count=1/8 Maskable- 64bit+
+        Capabilities: [68] MSI-X: Enable+ Count=8 Masked-
+        Capabilities: [78] Power Management version 3
+        Capabilities: [80] Express Endpoint, MSI 00
+        Capabilities: [100] Virtual Channel
+        Capabilities: [200] Advanced Error Reporting
+        Capabilities: [280] Secondary PCI Express
+        Capabilities: [300] Latency Tolerance Reporting
+        Kernel driver in use: xhci_hcd
+        Kernel modules: xhci_pci
+
+07:00.0 Non-Volatile memory controller: Intel Corporation PCIe Data Center SSD (rev 01) (prog-if 02 [NVM Express])
+        Subsystem: Intel Corporation SSD 750 Series [Add-in Card]
+        Flags: bus master, fast devsel, latency 0, IRQ 16, NUMA node 0, IOMMU group 21
+        Memory at df210000 (64-bit, non-prefetchable) [size=16K]
+        Expansion ROM at df200000 [disabled] [size=64K]
+        Capabilities: [40] Power Management version 3
+        Capabilities: [50] MSI-X: Enable+ Count=32 Masked-
+        Capabilities: [60] Express Endpoint, MSI 00
+        Capabilities: [100] Advanced Error Reporting
+        Capabilities: [150] Virtual Channel
+        Capabilities: [180] Power Budgeting <?>
+        Capabilities: [190] Alternative Routing-ID Interpretation (ARI)
+        Capabilities: [270] Device Serial Number 55-cd-2e-41-4c-99-a1-51
+        Capabilities: [2a0] Secondary PCI Express
+        Kernel driver in use: nvme
+        Kernel modules: nvme
