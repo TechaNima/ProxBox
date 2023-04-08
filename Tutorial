@@ -74,9 +74,11 @@ modprobe -r nvidia
 5. Now we can finally dump the vBios ROM.
 ./nvflash --save vbios.rom
 You can change vbios to whatever name you want for the ROM.
+
 Now to modify the bios:
 1. Download any hex editor you like.
-I recommend https://mh-nexus.de/en/hxd/
+I recommend https://mh-nexus.de/en/hxd
+
 2. Open the ROM with hex edit. Search for VIDEO
 https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis/images/okteta/okteta_search.png
 
@@ -105,15 +107,20 @@ https://www.mediafire.com/file/ewpy1p0rr132thk/MSI_util_v3.zip/file
 MD5 hash for zip-file: 8424509737CEDBDE4BA9E9A780D5CE96
 
 2. More scetchyness! Run as administrator.
+
 3.  Tick the MSI box for your GPU and High Definition Audio Controller (This is the GPU sound card if you will.) Also do this for any SoundBlaster Sound cards you may have if they support MSI mode. I didn't run into any issues without MSI mode with mine but might as well.
+
 4. Set interrupt priority as High
+
 5. Hit Apply at the top right and reboot your VM
 https://gyazo.com/8d218fd9ad33030f643119fd6518b543
 
 You can check if MSI mode is enabled for your VM in proxmox with
 lspci -vv
+
 It'll say something like this on your GFX card:
 Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
+
 + = Enabled, - = Disabled, 0 = Not supported
 
 Reference for MSI mode audio fix:
