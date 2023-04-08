@@ -45,6 +45,11 @@ update-initramfs -u
 reboot To reboot the host.
 
 VM settings:
+Download VirtIO drivers to your VM and install them. DO NOT SKIP!!
+https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+
+You can leave Display as Default or VirtIO-GPU if you want native VNC.
+
 Ignore that whole args: -cpu 'host,+kvm_pv_unhalt,+kvm_pv_eoi,hv_vendor_id=NV43FIX,kvm=off' line. As far as I can tell, it does fuck all. just set your cpu: host and be done with it.
 You will NEED to dump your ROM file. No way around it. You can mess with grub and those args all you want. You will still get error 43.
 
