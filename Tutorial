@@ -1,0 +1,115 @@
+This guide is a bit outdated: https://www.reddit.com/r/homelab/comments/b5xpua/the_ultimate_beginners_guide_to_gpu_passthrough/
+
+Here's how I got my GTX1080 to work:
+I'll be doing everything as root. You'll need to add sudo in front of the commands if you aren't a root user.
+
+Grub:
+nano /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt pcie_acs_override=downstream,multifunction nofb nomodeset video=efifb:off initcall_blacklist=sysfb_init"
+I needed the ACS patch because of everything I wanted to pass through.¨'
+
+Bare minimum to work:
+GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt nofb nomodeset video=efifb:off"
+
+nofb nomodeset video=efifb:off Disables the frame buffer Proxmox uses for output. This applies if you are passing through your primary GPU to a VM.
+
+initcall_blacklist=sysfb_init Use this if you get 2 blinking boxes on your primary display.
+
+Don't forget to do:
+update-grub
+
+nano /etc/modules Same as the guide:
+vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+IOMMU interrupt remapping. Same as the guide:
+
+echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
+echo "options kvm ignore_msrs=1" > /etc/modprobe.d/kvm.conf
+
+Blacklisting Drivers. Same as the guide:
+
+echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
+Not entirely convinced this actually did anything for me, but I did it as a step to trying to fix my GPU audio problems:
+echo "blacklist snd_hda_intel" >> /etc/modprobe.d/blacklist.conf
+
+Adding the GPU. Same as the guide:
+To get the ID: lspci -v
+lspci -n -s whatever it said next to VGA compatible controller
+echo "options vfio-pci ids=GPU ID,GPU Audio ID disable_vga=1"> /etc/modprobe.d/vfio.conf
+
+update-initramfs -u
+reboot To reboot the host.
+
+VM settings:
+Ignore that whole args: -cpu 'host,+kvm_pv_unhalt,+kvm_pv_eoi,hv_vendor_id=NV43FIX,kvm=off' line. As far as I can tell, it does fuck all. just set your cpu: host and be done with it.
+You will NEED to dump your ROM file. No way around it. You can mess with grub and those args all you want. You will still get error 43.
+
+The guide's version of the ROM file dump and modification no longer works.
+I recommend using Filezilla to transfer files between Proxmox and a Windows machine. Or you can figure out how to do everything in Linux with Okteta hex editor and the cp and rsync commands.
+
+1. Download https://www.techpowerup.com/download/nvidia-nvflash/
+(Using Windows for this part is easiest. I never figured out how to do this in Linux)
+You'll want the Linux version. You can do this in Windows as well, but I'll be using the Linux version in this guide since you'll need to use Proxmox shell anyway.
+
+2. Place the file from the zip "nvflash_5.792_linux.zip\x64" to anywhere you like on the Proxmox host. I just used cd ~/ as root user.
+
+3. The file needs perms to run chmod +x nvflash
+
+4. The GPU needs to not be running or drivers loaded for it.
+Run these commands:
+modprobe -r nvidia_uvm
+modprobe -r nvidia_drm
+modprobe -r nvidia_modeset
+modprobe -r nvidia
+
+5. Now we can finally dump the vBios ROM.
+./nvflash --save vbios.rom
+You can change vbios to whatever name you want for the ROM.
+Now to modify the bios:
+1. Download any hex editor you like.
+I recommend https://mh-nexus.de/en/hxd/
+2. Open the ROM with hex edit. Search for VIDEO
+https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis/images/okteta/okteta_search.png
+
+3. Now, place your cursor before the first U before the VIDEO we just searched, like this, and select everything before it and delete it:
+(CTRL + SHIFT +Home to select everything before your cursor)
+https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis/images/okteta/okteta_header_removal.png
+
+4. Save and place the modified ROM to /usr/share/kvm/
+
+5. Add the ROM to your VM config
+nano /etc/pve/qemu-server/101.conf Replace 101 with your VM's ID
+Edit the line where your GPU is:
+hostpci0: 0000:01:00,pcie=1,romfile=ROM_File.rom,x-vga=1
+Your GPU and Host PCI IDs are likely different!
+
+5. Start the VM and install Graphics drivers as you would on a regular PC.
+
+Reference for GPU ROM file patch:
+https://gitlab.com/risingprismtv/single-gpu-passthrough/-/wikis/6)-Preparation-and-placing-of-the-ROM-file
+
+Bonus. Fixing the glitchy GPU audio with MSI mode and adding a tiny bit of performance.
+If anyone knows how to get this to work without it. That would be appreciated. I could not figure it out.
+
+1. Scetchy download time YAY. MSI Util V3
+https://www.mediafire.com/file/ewpy1p0rr132thk/MSI_util_v3.zip/file
+MD5 hash for zip-file: 8424509737CEDBDE4BA9E9A780D5CE96
+
+2. More scetchyness! Run as administrator.
+3.  Tick the MSI box for your GPU and High Definition Audio Controller (This is the GPU sound card if you will.) Also do this for any SoundBlaster Sound cards you may have if they support MSI mode. I didn't run into any issues without MSI mode with mine but might as well.
+4. Set interrupt priority as High
+5. Hit Apply at the top right and reboot your VM
+https://gyazo.com/8d218fd9ad33030f643119fd6518b543
+
+You can check if MSI mode is enabled for your VM in proxmox with
+lspci -vv
+It'll say something like this on your GFX card:
+Capabilities: [68] MSI: Enable+ Count=1/1 Maskable- 64bit+
++ = Enabled, - = Disabled, 0 = Not supported
+
+Reference for MSI mode audio fix:
+https://forums.guru3d.com/threads/windows-line-based-vs-message-signaled-based-interrupts-msi-tool.378044/
