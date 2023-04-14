@@ -23,18 +23,25 @@ vfio
 vfio_iommu_type1
 vfio_pci
 vfio_virqfd
-IOMMU interrupt remapping. Same as the guide:
 
+
+IOMMU interrupt remapping. Same as the guide:
 echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
 echo "options kvm ignore_msrs=1" > /etc/modprobe.d/kvm.conf
 
-Blacklisting Drivers. Same as the guide:
+This'll stop all of those "pve kernel: kvm [1849]: ignored rdmsr" errors from cluttering the Syslog:
+echo "options kvm report_ignored_msrs=0 > /etc/modprobe.d/kvm.conf
 
+
+Blacklisting Drivers:
 echo "blacklist radeon" >> /etc/modprobe.d/blacklist.conf
 echo "blacklist nouveau" >> /etc/modprobe.d/blacklist.conf
 echo "blacklist nvidia" >> /etc/modprobe.d/blacklist.conf
+echo "blacklist nvidiafb" >> /etc/modprobe.d/blacklist.conf
+
 Not entirely convinced this actually did anything for me, but I did it as a step to trying to fix my GPU audio problems:
 echo "blacklist snd_hda_intel" >> /etc/modprobe.d/blacklist.conf
+
 
 Adding the GPU. Same as the guide:
 To get the ID: lspci -v
@@ -108,14 +115,14 @@ MD5 hash for zip-file: 8424509737CEDBDE4BA9E9A780D5CE96
 
 2. More scetchyness! Run as administrator.
 
-3.  Tick the MSI box for your GPU and High Definition Audio Controller (This is the GPU sound card if you will.) Also do this for any SoundBlaster Sound cards you may have if they support MSI mode. I didn't run into any issues without MSI mode with mine but might as well.
+3. Tick the MSI box for your GPU and High Definition Audio Controller (This is the GPU sound card if you will.) Also do this for any SoundBlaster Sound cards you may have if they support MSI mode. I didn't run into any issues without MSI mode with mine but might as well.
 
 4. Set interrupt priority as High
 
 5. Hit Apply at the top right and reboot your VM
 https://gyazo.com/8d218fd9ad33030f643119fd6518b543
 
-You can check if MSI mode is enabled for your VM in proxmox with
+You can check if MSI mode is enabled for your VM in proxmox with:
 lspci -vv
 
 It'll say something like this on your GFX card:
