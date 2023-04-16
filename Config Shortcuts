@@ -1,0 +1,22 @@
+Grub: nano /etc/default/grub
+Always run after editing:
+update-grub
+reboot
+
+VFIO: nano /etc/modules
+Always run after editing:
+update-initramfs -u
+reboot
+
+IOMMU interrupts: nano /etc/modprobe.d/iommu_unsafe_interrupts.conf
+
+KVM Config: nano /etc/modprobe.d/kvm.conf
+
+Driver Blacklist: nano /etc/modprobe.d/blacklist.conf
+
+KVM Folder cd /usr/share/kvm/
+
+VM Configs:
+Edith: nano /etc/pve/qemu-server/100.conf
+Prox-ROG-01: nano /etc/pve/qemu-server/101.conf
+ProxTN: nano /etc/pve/qemu-server/102.conf
