@@ -7,6 +7,7 @@ VFIO: nano /etc/modules
 Always run after editing:
 update-initramfs -u
 reboot
+VFIO Stub list: nano /etc/modprobe.d/vfio.conf
 
 IOMMU interrupts: nano /etc/modprobe.d/iommu_unsafe_interrupts.conf
 
