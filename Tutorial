@@ -24,6 +24,9 @@ vfio_iommu_type1
 vfio_pci
 vfio_virqfd
 
+Run:
+update-initramfs -u
+
 
 IOMMU interrupt remapping. Same as the guide:
 echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
@@ -50,8 +53,10 @@ To get the ID: lspci -v
 lspci -n -s whatever it said next to VGA compatible controller
 echo "options vfio-pci ids=GPU ID,GPU Audio ID disable_vga=1"> /etc/modprobe.d/vfio.conf
 
-update-initramfs -u
-reboot To reboot the host.
+Run:
+reboot
+To reboot the host.
+
 
 VM settings:
 Download VirtIO drivers to your VM and install them. DO NOT SKIP!!
