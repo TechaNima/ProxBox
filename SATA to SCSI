@@ -1,0 +1,26 @@
+Shut down your VM and mount the install ISO (Win10 for example) and the VirtIO ISO.
+
+VirtIO Driver download: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+
+Set the boot order to the Windows ISO.
+Set the boot disk type as SATA.
+Start the VM and it will boot in the setup screen. Hit any key when prompted.
+Press SHIFT+F10, that will bring up the CMD shell.
+
+Check which drive letter the VirtIO ISO DVD drive has (E: for example).
+
+Next step will insert the drivers:
+dism /image:C:\ /add-driver /driver:E:\vioscsi\w10\amd64
+
+Once the command has completed power down the VM from the CMD shell with:
+wpeutil shutdown -s
+
+Unmount both ISOs from the VM
+
+Change the disk type to SCSI:
+nano /etc/pve/qemu-server/101.conf (or whatever your VM ID is)
+Edit: sata0: /dev/disk/by-id/.. --> scsi0: /dev/disk/by-id/..
+
+Change boot order to scsi0 from Options in Proxmox GUI.
+
+Power it on again. Now Windows should boot as desired.
