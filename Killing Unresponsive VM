@@ -1,0 +1,2 @@
+ps aux | grep <VMID> # will show you the kvm <PID> running your VMID
+kill -9 <PID>
