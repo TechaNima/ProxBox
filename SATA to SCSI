@@ -8,6 +8,8 @@ Start the VM and it will boot in the setup screen. Hit any key when prompted.
 Press SHIFT+F10, that will bring up the CMD shell.
 
 Check which drive letter the VirtIO ISO DVD drive has (E: for example).
+diskpart
+list volume
 
 Next step will insert the drivers:
 dism /image:C:\ /add-driver /driver:E:\vioscsi\w10\amd64
