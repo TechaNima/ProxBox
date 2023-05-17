@@ -29,13 +29,13 @@ update-initramfs -u
 
 
 IOMMU interrupt remapping. Same as the guide:
-echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" > /etc/modprobe.d/iommu_unsafe_interrupts.conf
+echo "options vfio_iommu_type1 allow_unsafe_interrupts=1" >> /etc/modprobe.d/iommu_unsafe_interrupts.conf
 
 
 KVM Config:
-echo "options kvm ignore_msrs=1" > /etc/modprobe.d/kvm.conf
+echo "options kvm ignore_msrs=1" >> /etc/modprobe.d/kvm.conf
 This'll stop all of those "pve kernel: kvm [1849]: ignored rdmsr" errors from cluttering the Syslog:
-echo "options kvm report_ignored_msrs=0 > /etc/modprobe.d/kvm.conf
+echo "options kvm report_ignored_msrs=0" >> /etc/modprobe.d/kvm.conf
 
 
 Blacklisting Drivers:
