@@ -1,0 +1,7 @@
+lsblk #Lists all block devices
+fdisk -l #Lists all disks and some basic info
+lsblk -o +FSTYPE,UUID  /dev/sdd* #This finds the filesystem type and UUID of the disk you want to permanently mount. Replace sdd with your disk!
+
+mkdir /mnt/pve/(Your Mount Point Name)
+Once you have your mount path and disk UUID modify this accordingly:
+echo 'UUID=8aca782f-8e21-47d3-a247-8812c6a79968 /mnt/pve/Samsung_840_Evo_1TB    ext4    defaults 0   2' >> /etc/fstab
