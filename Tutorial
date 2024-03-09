@@ -48,9 +48,9 @@ Not entirely convinced this actually did anything for me, but I did it as a step
 echo "blacklist snd_hda_intel" >> /etc/modprobe.d/blacklist.conf
 
 
-Adding the GPU. Same as the guide:
-To get the ID: lspci -v
-lspci -n -s whatever it said next to VGA compatible controller
+Adding the GPU:
+To get the IDs:
+lspci -v | grep "VGA compatible controller" -A 1 | grep -oP "^[0-9a-fA-F]{2}:[0-9a-fA-F]{2}\.[0-9a-fA-F]" | xargs -I {} sh -c 'lspci -n -s {} && lspci -n -s {}'
 echo "options vfio-pci ids=GPU ID,GPU Audio ID disable_vga=1"> /etc/modprobe.d/vfio.conf
 
 Run:
