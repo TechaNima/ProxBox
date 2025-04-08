@@ -25,10 +25,11 @@ scsi5: The virtual port number which the disk will be using to attach to VM
 For example, in the following configuration, the disk is attached by using -scsi0, if we want to attach another disk, we can use -scsi1 or -scsi2 or -scsi3 etc…..
 
 4 Check if the disk attached successfully
-grep SHdi1uhJ /etc/pve/qemu-server/100.conf
-Output
+cat /etc/pve/qemu-server/100.conf | grep SHdi1uhJ 
 
+Output should look like this:
 scsi5: /dev/disk/by-id/ata-xxxxxxxxx-xxxxx_xxx, size=......
+
 Note
 There are different Controller Types we can use, IDE (Slow), SCSI (Fast), VirtIO Block (May get deprecated in the future)
 Using SCSI with VirtIO SCSI as SCSI Controller Type for VM disks is recommended
